@@ -1,0 +1,24 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://bctc:Bctc666!@lab.bctc.io:7087/se-8-1"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  post     Post[]
+}
+
+model Post {
+  id       Int    @id @default(autoincrement())
+  title    String
+  content  String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId Int
+}
